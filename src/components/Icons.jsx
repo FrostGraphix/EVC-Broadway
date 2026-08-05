@@ -128,3 +128,37 @@ export const ArrowIcon = (p) => (
     <path d="M5 12h14M13 6l6 6-6 6" />
   </Icon>
 );
+
+export const PhoneIcon = (p) => (
+  <Icon {...p}>
+    <path d="M6.6 3H12c5 0 9 4 9 9s-4 9-9 9H6.6C4.6 21 3 19.4 3 17.4V6.6C3 4.6 4.6 3 6.6 3z" />
+    <path d="M15 7l-3 5 3 5" />
+    <circle cx="7.5" cy="12" r="1.2" fill="currentColor" stroke="none" />
+  </Icon>
+);
+
+export const CheckIcon = (p) => (
+  <Icon {...p}>
+    <path d="M5 12l5 5 9-9" />
+  </Icon>
+);
+
+export const StarIcon = (p) => (
+  <Icon {...p}>
+    <path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z" />
+  </Icon>
+);
+
+export const BuildingIcon = (p) => (
+  <Icon {...p}>
+    <rect x="3" y="3" width="18" height="18" rx="1" />
+    <path d="M3 9h18M9 3v18M15 9v12M6 13h1M6 17h1M11 13h2M11 17h2M17 13h1M17 17h1" />
+  </Icon>
+);
+
+export const KeyIcon = (p) => (
+  <Icon {...p}>
+    <circle cx="8" cy="11" r="4.5" />
+    <path d="M12 11h9M18 9v4" />
+  </Icon>
+);
