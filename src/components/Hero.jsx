@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
 import { BroadwayWordmark } from './Logo.jsx';
-import { PinIcon, DocIcon, ShieldIcon, ArrowIcon, StarIcon } from './Icons.jsx';
+import { PinIcon, DocIcon, ShieldIcon, ArrowIcon } from './Icons.jsx';
 import { heroImage } from '../assets/photos.js';
 
 const container = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: { staggerChildren: 0.12, delayChildren: 0.15 },
+    transition: { staggerChildren: 0.14, delayChildren: 0.2 },
   },
 };
 
@@ -71,7 +71,7 @@ export function Hero() {
 
   return (
     <section
-      className="bw-hero bw-hero--supercharged"
+      className="bw-hero"
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
@@ -88,11 +88,11 @@ export function Hero() {
             scale: imgScale,
           }}
           initial={{ scale: 1.15, opacity: 0 }}
-          animate={{ opacity: 0.92 }}
+          animate={{ opacity: 0.95 }}
           transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
         />
 
-        {/* Ambient Radial Spotlight behind logo */}
+        {/* Ambient Radial Glow behind logo */}
         <div className="bw-hero__spotlight" />
 
         {/* Shimmer Light Gradient */}
@@ -119,43 +119,15 @@ export function Hero() {
         initial="hidden"
         animate="show"
       >
-        {/* Top Status Chip */}
-        <motion.div variants={item} className="bw-hero__status-chip">
-          <span className="bw-hero__status-pulse" />
-          <span>NOW SELLING • PHASE 1 ALLOTMENT</span>
-        </motion.div>
-
-        {/* Brand Logo with Glow Wrap */}
+        {/* Clean Logo Display */}
         <motion.div variants={item} className="bw-hero__wordmark-wrap">
           <BroadwayWordmark variant="light" size="lg" />
         </motion.div>
 
-        {/* Tagline / Subtitle */}
-        <motion.h1 className="bw-hero__headline" variants={item}>
-          Granting access to a smarter communal living.
-        </motion.h1>
-
-        <motion.p className="bw-hero__subtext" variants={item}>
-          At the edge of Kwara State University, Malete — an infrastructure-first estate engineered for modern living and high-yield investment.
+        {/* Clean Tagline */}
+        <motion.p className="bw-hero__tag" variants={item}>
+          …granting access to a smarter communal living, at the edge of Kwara State University.
         </motion.p>
-
-        {/* Hero Quick Stat Bar (Visible on Mobile & Desktop!) */}
-        <motion.div className="bw-hero__stats-bar" variants={item}>
-          <div className="bw-hero__stat-chip">
-            <span className="val">9.8%</span>
-            <span className="lbl">Annual ROI</span>
-          </div>
-          <div className="bw-hero__stat-divider" />
-          <div className="bw-hero__stat-chip">
-            <span className="val">C of O</span>
-            <span className="lbl">Verified Title</span>
-          </div>
-          <div className="bw-hero__stat-divider" />
-          <div className="bw-hero__stat-chip">
-            <span className="val">60 Units</span>
-            <span className="lbl">Phase 1 Allotment</span>
-          </div>
-        </motion.div>
 
         {/* Action Buttons */}
         <motion.div className="bw-hero__actions" variants={item}>
