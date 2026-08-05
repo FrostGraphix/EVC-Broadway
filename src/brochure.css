@@ -58,20 +58,21 @@ body{margin:0;}
 .bw-section--tight{padding-top:56px;padding-bottom:56px;}
 
 /* hero */
-.bw-hero{position:relative;min-height:min(112vh,860px);display:flex;flex-direction:column;justify-content:flex-end;background:var(--navy-deep);color:var(--paper);overflow:hidden;}
+.bw-hero{position:relative;height:100dvh;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;background:var(--navy-deep);color:var(--paper);overflow:hidden;}
 .bw-hero__stage{position:absolute;inset:0;overflow:hidden;perspective:1400px;}
 .bw-hero__img{position:absolute;inset:-6%;width:112%;height:112%;object-fit:cover;opacity:.92;transform-origin:50% 50%;transform-style:preserve-3d;will-change:transform;}
 .bw-hero__scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,25,38,.72) 0%,rgba(20,25,38,.22) 32%,rgba(20,25,38,.35) 62%,rgba(20,25,38,.94) 100%);}
 .bw-hero__badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,246,238,.1);border:1px solid rgba(255,246,238,.35);backdrop-filter:blur(6px);padding:8px 14px;border-radius:999px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;white-space:nowrap;}
 .bw-hero__badge--meta{margin-left:0;}
-.bw-hero__body{position:relative;z-index:2;padding:0 40px 46px;}
+.bw-hero__body{position:relative;z-index:2;padding:0 40px 36px;margin-top:auto;}
 .bw-hero__tag{font-size:clamp(15px,2vw,19px);color:var(--peach);font-weight:500;margin:18px 0 30px;max-width:34ch;}
 .bw-hero__meta{display:flex;flex-wrap:wrap;gap:18px 26px;align-items:center;padding-top:22px;border-top:1px solid rgba(255,246,238,.22);}
 .bw-hero__meta-item{display:flex;align-items:center;gap:9px;font-size:13.5px;color:rgba(255,246,238,.86);}
 .bw-hero__meta-item .icon{width:17px;height:17px;color:var(--orange);flex:none;}
 .bw-root a:focus-visible,.bw-root button:focus-visible{outline:3px solid var(--orange);outline-offset:3px;}
 @media (max-width:640px){
-  .bw-hero__body{padding:0 22px 32px;}
+  .bw-hero{height:100dvh !important;min-height:100dvh !important;}
+  .bw-hero__body{padding:0 20px 24px !important;margin-top:auto !important;}
   .bw-hero__meta{gap:12px 18px;padding-top:18px;}
   .bw-hero__badge{font-size:10px;padding:7px 12px;}
 }
@@ -467,7 +468,8 @@ body{margin:0;}
 /* Supercharged Hero Section Styles */
 .bw-hero--supercharged {
   position: relative;
-  min-height: min(100vh, 920px);
+  height: 100dvh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
