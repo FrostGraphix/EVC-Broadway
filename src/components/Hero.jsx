@@ -1,37 +1,37 @@
 import { useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
 import { BroadwayWordmark } from './Logo.jsx';
-import { PinIcon, DocIcon, ShieldIcon, ArrowIcon } from './Icons.jsx';
+import { PinIcon, DocIcon, ShieldIcon, ArrowIcon, StarIcon } from './Icons.jsx';
 import { heroImage } from '../assets/photos.js';
 
 const container = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: { staggerChildren: 0.14, delayChildren: 0.2 },
+    transition: { staggerChildren: 0.12, delayChildren: 0.15 },
   },
 };
 
 const item = {
-  hidden: { opacity: 0, y: 28, filter: 'blur(8px)' },
+  hidden: { opacity: 0, y: 24, filter: 'blur(6px)' },
   show: {
     opacity: 1,
     y: 0,
     filter: 'blur(0px)',
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
 const floatCard = (delay = 0) => ({
-  initial: { opacity: 0, x: 30, y: 20 },
+  initial: { opacity: 0, x: 24, y: 16 },
   animate: {
     opacity: 1,
     x: 0,
-    y: [0, -10, 0],
+    y: [0, -8, 0],
     transition: {
       opacity: { duration: 0.8, delay },
       x: { duration: 0.8, delay },
-      y: { duration: 6, repeat: Infinity, ease: 'easeInOut', delay },
+      y: { duration: 5, repeat: Infinity, ease: 'easeInOut', delay },
     },
   },
 });
@@ -43,10 +43,10 @@ export function Hero() {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const springConfig = { damping: 25, stiffness: 120 };
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [6, -6]), springConfig);
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-8, 8]), springConfig);
-  const imgScale = useSpring(useTransform(mouseX, [-0.5, 0.5], [1.06, 1.12]), springConfig);
+  const springConfig = { damping: 28, stiffness: 140 };
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [5, -5]), springConfig);
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-6, 6]), springConfig);
+  const imgScale = useSpring(useTransform(mouseX, [-0.5, 0.5], [1.05, 1.1]), springConfig);
 
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -71,35 +71,39 @@ export function Hero() {
 
   return (
     <section
-      className="bw-hero"
+      className="bw-hero bw-hero--supercharged"
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Background Stage with Motion Parallax */}
+      {/* Background Stage with Dynamic Parallax Motion */}
       <div className="bw-hero__stage">
         <motion.img
           className="bw-hero__img"
           src={heroImage}
-          alt="Broadway Residentials facade at dusk, warm lit windows and covered entrance"
+          alt="Broadway Residentials facade at dusk"
           style={{
             rotateX,
             rotateY,
             scale: imgScale,
           }}
           initial={{ scale: 1.15, opacity: 0 }}
-          animate={{ opacity: 0.95 }}
-          transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
+          animate={{ opacity: 0.92 }}
+          transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
         />
-        {/* Animated Light Shimmer Overlay */}
+
+        {/* Ambient Radial Spotlight behind logo */}
+        <div className="bw-hero__spotlight" />
+
+        {/* Shimmer Light Gradient */}
         <motion.div
           className="bw-hero__shimmer"
           animate={{
-            opacity: [0.3, 0.65, 0.3],
-            scale: [1, 1.04, 1],
+            opacity: [0.25, 0.55, 0.25],
+            scale: [1, 1.03, 1],
           }}
           transition={{
-            duration: 8,
+            duration: 7,
             repeat: Infinity,
             ease: 'easeInOut',
           }}
@@ -108,35 +112,57 @@ export function Hero() {
 
       <div className="bw-hero__scrim" />
 
-      {/* Hero Content Body */}
+      {/* Hero Body Content */}
       <motion.div
         className="bw-hero__body"
         variants={container}
         initial="hidden"
         animate="show"
       >
-        {/* Live Status Badge */}
-        <motion.div variants={item} className="bw-hero__status">
-          <span className="bw-hero__status-dot" />
-          <span>Now Selling • Phase 1 Residential Allotment</span>
+        {/* Top Status Chip */}
+        <motion.div variants={item} className="bw-hero__status-chip">
+          <span className="bw-hero__status-pulse" />
+          <span>NOW SELLING • PHASE 1 ALLOTMENT</span>
         </motion.div>
 
-        {/* Brand Logo / Wordmark */}
+        {/* Brand Logo with Glow Wrap */}
         <motion.div variants={item} className="bw-hero__wordmark-wrap">
           <BroadwayWordmark variant="light" size="lg" />
         </motion.div>
 
-        {/* Tagline */}
-        <motion.p className="bw-hero__tag" variants={item}>
-          …granting access to a smarter communal living, at the edge of Kwara State University.
+        {/* Tagline / Subtitle */}
+        <motion.h1 className="bw-hero__headline" variants={item}>
+          Granting access to a smarter communal living.
+        </motion.h1>
+
+        <motion.p className="bw-hero__subtext" variants={item}>
+          At the edge of Kwara State University, Malete — an infrastructure-first estate engineered for modern living and high-yield investment.
         </motion.p>
 
-        {/* Quick Action Buttons */}
+        {/* Hero Quick Stat Bar (Visible on Mobile & Desktop!) */}
+        <motion.div className="bw-hero__stats-bar" variants={item}>
+          <div className="bw-hero__stat-chip">
+            <span className="val">9.8%</span>
+            <span className="lbl">Annual ROI</span>
+          </div>
+          <div className="bw-hero__stat-divider" />
+          <div className="bw-hero__stat-chip">
+            <span className="val">C of O</span>
+            <span className="lbl">Verified Title</span>
+          </div>
+          <div className="bw-hero__stat-divider" />
+          <div className="bw-hero__stat-chip">
+            <span className="val">60 Units</span>
+            <span className="lbl">Phase 1 Allotment</span>
+          </div>
+        </motion.div>
+
+        {/* Action Buttons */}
         <motion.div className="bw-hero__actions" variants={item}>
           <motion.button
             className="bw-btn bw-btn--hero-primary"
-            whileHover={{ scale: 1.04, y: -2 }}
-            whileTap={{ scale: 0.97 }}
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.96 }}
             onClick={() => scrollToSection('residences')}
           >
             Explore Residences <ArrowIcon size={16} />
@@ -144,69 +170,61 @@ export function Hero() {
 
           <motion.button
             className="bw-btn bw-btn--hero-secondary"
-            whileHover={{ scale: 1.04, y: -2 }}
-            whileTap={{ scale: 0.97 }}
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.96 }}
             onClick={() => scrollToSection('pricing')}
           >
             View Pricing Offers
           </motion.button>
         </motion.div>
 
-        {/* Metadata Strip */}
+        {/* Metadata Footer Strip */}
         <motion.div className="bw-hero__meta" variants={item}>
-          <motion.span
-            className="bw-hero__meta-item"
-            whileHover={{ x: 4 }}
-            transition={{ type: 'spring', stiffness: 300 }}
-          >
-            <PinIcon size={17} /> KWASU Axis, Malete, Kwara State
-          </motion.span>
+          <div className="bw-hero__meta-item">
+            <PinIcon size={16} />
+            <span>KWASU Axis, Malete, Kwara State</span>
+          </div>
 
-          <motion.span
-            className="bw-hero__meta-item"
-            whileHover={{ x: 4 }}
-            transition={{ type: 'spring', stiffness: 300 }}
-          >
-            <DocIcon size={17} /> Studio • 2-Bed • 3-Bed Bungalows
-          </motion.span>
+          <div className="bw-hero__meta-item">
+            <DocIcon size={16} />
+            <span>Studio • 2-Bed • 3-Bed Bungalows</span>
+          </div>
 
-          <motion.span
-            className="bw-hero__badge bw-hero__badge--meta"
-            whileHover={{ scale: 1.05 }}
-          >
-            <ShieldIcon size={14} /> A New Development by EVC
-          </motion.span>
+          <div className="bw-hero__badge bw-hero__badge--meta">
+            <ShieldIcon size={13} />
+            <span>A New Development by EVC</span>
+          </div>
         </motion.div>
       </motion.div>
 
-      {/* Floating Glass Accent Cards (Right Side Desktop) */}
+      {/* Floating Glass Cards (Desktop Side Display) */}
       <div className="bw-hero__float-cards">
         <motion.div
           className="bw-hero__float-card"
-          variants={floatCard(0.6)}
+          variants={floatCard(0.5)}
           initial="initial"
           animate="animate"
-          whileHover={{ scale: 1.05, y: -5 }}
+          whileHover={{ scale: 1.05, y: -4 }}
         >
-          <div className="bw-hero__float-title">High Investment Yield</div>
+          <div className="bw-hero__float-badge">HIGH YIELD ASSET</div>
           <div className="bw-hero__float-value">9.8% Annual ROI</div>
           <div className="bw-hero__float-sub">Driven by KWASU student & staff demand</div>
         </motion.div>
 
         <motion.div
           className="bw-hero__float-card"
-          variants={floatCard(0.9)}
+          variants={floatCard(0.8)}
           initial="initial"
           animate="animate"
-          whileHover={{ scale: 1.05, y: -5 }}
+          whileHover={{ scale: 1.05, y: -4 }}
         >
-          <div className="bw-hero__float-title">Title Guarantee</div>
+          <div className="bw-hero__float-badge">VERIFIED LAND TITLE</div>
           <div className="bw-hero__float-value">Certificate of Occupancy</div>
-          <div className="bw-hero__float-sub">100% verified legal perfection</div>
+          <div className="bw-hero__float-sub">100% legal perfection & peace of mind</div>
         </motion.div>
       </div>
 
-      {/* Scroll Cue Animation */}
+      {/* Scroll Indicator */}
       <motion.div
         className="bw-scrollcue"
         aria-hidden="true"
